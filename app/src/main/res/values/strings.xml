@@ -8,4 +8,17 @@
     <string name="historyButton">View History</string>
     <string name="currentButton">View Current Goals</string>
     <string name="createButton">Create New Goal</string>
+    <string name="goalNameView">Goal Name</string>
+    <string name="deadline">Deadline:</string>
+    <string name="timeLeft">Time Left:</string>
+    <string name="deadlineStart">00.00.00</string>
+    <string name="deadlineMid">00.00.00</string>
+    <string name="deadlineEnd">00.00.00</string>
+    <string name="timeStart">00:00</string>
+    <string name="timeMid">00:00</string>
+    <string name="timeEnd">00:00</string>
+    <string name="speedView">Speed:</string>
+    <string name="distanceView">Distance Travelled:</string>
+    <string name="speedUnit">0.00 km/h</string>
+    <string name="distanceUnit">0 M</string>
 </resources>
