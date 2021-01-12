@@ -1,3 +1,9 @@
+# examples
+# Thumbs.db
+# *.bak
+# bin/
+target/
+
 # Compiled class file
 *.class
 
