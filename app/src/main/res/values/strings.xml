@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MyFitnessJourney</string>
+    <string name="stepsStatus">0 Steps from 0</string>
+    <string name="todayProgress">Progress Today</string>
+    <string name="cardioGoals">Cardio Goals</string>
+    <string name="goalDesc">No Goals for today</string>
+    <string name="progressButton">Goals</string>
+    <string name="historyButton">View History</string>
+    <string name="currentButton">View Current Goals</string>
+    <string name="createButton">Create New Goal</string>
 </resources>
