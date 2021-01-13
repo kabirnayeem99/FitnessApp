@@ -3,6 +3,7 @@ package ch.zli.eb.myfitnessjourney;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -41,5 +42,21 @@ public class CreateActivity extends AppCompatActivity {
         createButton = findViewById(R.id.createNewButton);
         clearButton = findViewById(R.id.clearButton);
 
+    }
+
+    // HANDLER FOR clearButton
+    public void clearInputFields(View v) {
+        nameInput.getText().clear();
+        timeInput.getText().clear();
+
+        if (checkYes.isChecked()) {
+            checkYes.toggle();
+        }
+        if (checkNo.isChecked()) {
+            checkNo.toggle();
+        }
+
+        startDateInput.getText().clear();
+        endDateInput.getText().clear();
     }
 }
