@@ -2,7 +2,9 @@ package ch.zli.eb.myfitnessjourney;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,5 +38,23 @@ public class MainActivity extends AppCompatActivity {
         currentButton = findViewById(R.id.currentButton);
         createButton = findViewById(R.id.createButton);
 
+    }
+
+    // HANDLES createButton CLICK -> REDIRECTS TO CREATE ACTIVITY
+    public void redirectToCreateActivity(View v) {
+        Intent createForm = new Intent(getApplicationContext(), CreateActivity.class);
+        startActivity(createForm);
+    }
+
+    // HANDLES currentButton CLICK -> REDIRECTS TO LIST ACTIVITY
+    public void redirectToListActivityCurrent(View v) {
+        Intent listActivity = new Intent(getApplicationContext(), ListActivity.class);
+        startActivity(listActivity);
+    }
+
+    // HANDLES currentButton CLICK -> REDIRECTS TO LIST ACTIVITY
+    public void redirectToListActivityHistory(View v) {
+        Intent listActivityHistory = new Intent(getApplicationContext(), ListActivity.class);
+        startActivity(listActivityHistory);
     }
 }
