@@ -107,7 +107,7 @@
         app:layout_constraintTop_toBottomOf="@+id/historyButton" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/createButton"
         android:layout_width="306dp"
         android:layout_height="38dp"
         android:layout_marginStart="52dp"
