@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/nameInput"
         android:layout_width="217dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/createTitle" />
 
     <EditText
-        android:id="@+id/editTextTime"
+        android:id="@+id/timeInput"
         android:layout_width="217dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -67,7 +67,7 @@
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/timeLabel"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
 
     <Button
         android:id="@+id/createNewButton"
@@ -101,7 +101,7 @@
         android:layout_marginTop="35dp"
         android:text="@string/remindersLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+        app:layout_constraintTop_toBottomOf="@+id/timeInput" />
 
     <CheckBox
         android:id="@+id/checkYes"
@@ -113,7 +113,7 @@
         android:text="@string/yesCheck"
         app:layout_constraintEnd_toStartOf="@+id/checkNo"
         app:layout_constraintStart_toEndOf="@+id/remindersLabel"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+        app:layout_constraintTop_toBottomOf="@+id/timeInput" />
 
     <CheckBox
         android:id="@+id/checkNo"
@@ -123,7 +123,7 @@
         android:layout_marginEnd="70dp"
         android:text="@string/noCheck"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+        app:layout_constraintTop_toBottomOf="@+id/timeInput" />
 
     <TextView
         android:id="@+id/startDateLabel"
