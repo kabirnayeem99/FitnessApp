@@ -114,6 +114,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="53dp"
         android:layout_marginBottom="70dp"
+        android:onClick="redirectToCreateActivity"
         android:text="@string/createButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
