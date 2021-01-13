@@ -1,3 +1,41 @@
 <resources>
+    <!-- MAIN ACTIVITY -->
     <string name="app_name">MyFitnessJourney</string>
+    <string name="stepsStatus">0 Steps from 0</string>
+    <string name="todayProgress">Progress Today</string>
+    <string name="cardioGoals">Cardio Goals</string>
+    <string name="goalDesc">No Goals for today</string>
+    <string name="progressButton">Goals</string>
+    <string name="historyButton">View History</string>
+    <string name="currentButton">View Current Goals</string>
+    <string name="createButton">Create New Goal</string>
+    <!-- VIEW ACTIVITY -->
+    <string name="goalNameView">Goal Name</string>
+    <string name="deadline">Deadline:</string>
+    <string name="timeLeft">Time Left:</string>
+    <string name="deadlineStart">00.00.00</string>
+    <string name="deadlineMid">00.00.00</string>
+    <string name="deadlineEnd">00.00.00</string>
+    <string name="timeStart">00:00</string>
+    <string name="timeMid">00:00</string>
+    <string name="timeEnd">00:00</string>
+    <string name="speedView">Speed:</string>
+    <string name="distanceView">Distance Travelled:</string>
+    <string name="speedUnit">0.00 km/h</string>
+    <string name="distanceUnit">0 M</string>
+    <!-- CREATE ACTIVITY -->
+    <string name="createTitle">Create New Goal</string>
+    <string name="nameLabel">Name: </string>
+    <string name="timeLabel">Time: </string>
+    <string name="remindersLabel">Reminders: </string>
+    <string name="createNewButton">Create</string>
+    <string name="clearButton">Clear</string>
+    <string name="timeHint">00:00</string>
+    <string name="nameHint">Name</string>
+    <string name="yesCheck">Yes</string>
+    <string name="noCheck">No</string>
+    <string name="startDateLabel">Start Date: </string>
+    <string name="endDateLabel">End Date: </string>
+    <string name="startDate">01.01.21</string>
+    <string name="endDate">31.01.21</string>
 </resources>
