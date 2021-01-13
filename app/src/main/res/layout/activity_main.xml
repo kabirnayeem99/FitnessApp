@@ -89,6 +89,7 @@
         android:layout_marginStart="52dp"
         android:layout_marginEnd="53dp"
         android:layout_marginBottom="24dp"
+        android:onClick="redirectToListActivityHistory"
         android:text="@string/historyButton"
         app:layout_constraintBottom_toTopOf="@+id/currentButton"
         app:layout_constraintEnd_toEndOf="parent"

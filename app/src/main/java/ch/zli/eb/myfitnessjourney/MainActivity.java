@@ -40,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // HANDLES createButton CLICK -> REDIRECTS TO CREATE ACTIVITY
+    public void redirectToCreateActivity(View v) {
+        Intent createForm = new Intent(getApplicationContext(), CreateActivity.class);
+        startActivity(createForm);
+    }
+
     // HANDLES currentButton CLICK -> REDIRECTS TO LIST ACTIVITY
     public void redirectToListActivityCurrent(View v) {
         Intent listActivity = new Intent(getApplicationContext(), ListActivity.class);
