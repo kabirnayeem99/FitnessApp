@@ -9,9 +9,12 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    // VIEW ELEMENTS AS PROPERTIES
     ProgressBar progressBar;
+
     TextView stepsStatus;
     TextView todaysGoalDesc;
+
     Button historyButton;
     Button progressButton;
     Button currentButton;
@@ -22,9 +25,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // ASSIGNING VIEW ELEMENTS TO PROPERTIES
         progressBar = findViewById(R.id.progressbar);
+
         stepsStatus = findViewById(R.id.stepsStatus);
         todaysGoalDesc = findViewById(R.id.goalDesc);
+
         historyButton = findViewById(R.id.historyButton);
         progressButton = findViewById(R.id.progressButton);
         currentButton = findViewById(R.id.currentButton);
