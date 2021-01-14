@@ -1,4 +1,4 @@
-package ch.zli.eb.myfitnessjourney;
+package ch.zli.eb.myfitnessjourney.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
+import ch.zli.eb.myfitnessjourney.R;
 
 public class CreateActivity extends AppCompatActivity {
 

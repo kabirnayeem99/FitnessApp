@@ -1,4 +1,4 @@
-package ch.zli.eb.myfitnessjourney;
+package ch.zli.eb.myfitnessjourney.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import ch.zli.eb.myfitnessjourney.R;
 
 public class MainActivity extends AppCompatActivity {
 
