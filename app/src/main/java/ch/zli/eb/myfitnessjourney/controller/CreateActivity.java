@@ -61,4 +61,5 @@ public class CreateActivity extends AppCompatActivity {
         startDateInput.getText().clear();
         endDateInput.getText().clear();
     }
+
 }
