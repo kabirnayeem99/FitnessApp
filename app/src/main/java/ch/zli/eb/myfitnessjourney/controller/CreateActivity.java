@@ -7,8 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ch.zli.eb.myfitnessjourney.R;
+import ch.zli.eb.myfitnessjourney.model.Goal;
 
 public class CreateActivity extends AppCompatActivity {
 
@@ -25,6 +34,7 @@ public class CreateActivity extends AppCompatActivity {
     Button createButton;
     Button clearButton;
 
+    Goal userGoal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +70,61 @@ public class CreateActivity extends AppCompatActivity {
 
         startDateInput.getText().clear();
         endDateInput.getText().clear();
+    }
+
+    public void createGoalButton(View v) throws ParseException {
+        boolean validation = true;
+
+        // REGEX FOR TIME INPUT
+        String timeFormat = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
+        Pattern timePattern = Pattern.compile(timeFormat);
+        Matcher timeMatcher = timePattern.matcher(timeInput.getText().toString());
+
+        // NOT ENOUGH TIME FOR BETTER VALIDATION
+        // VALIDATION PROCESS NAME -> TIME -> CHECKBOXES -> START DATE -> END DATE
+        if (nameInput.getText().toString().trim().equals("")) {
+            Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show();
+            validation = false;
+        } else if (!timeMatcher.matches()) {
+            Toast.makeText(this, "Please enter a valid time. Format: hh:mm", Toast.LENGTH_LONG).show();
+            validation = false;
+        } else if (checkNo.isChecked() && checkYes.isChecked()) {
+            Toast.makeText(this, "Please choose if you want reminders", Toast.LENGTH_LONG).show();
+            validation = false;
+        } else if (!checkYes.isChecked() && !checkNo.isChecked()) {
+            Toast.makeText(this, "Please choose one option", Toast.LENGTH_LONG).show();
+            validation = false;
+        } else if (!validateDateInputs()) {
+            Toast.makeText(this, "Please enter valid dates", Toast.LENGTH_LONG).show();
+            validation = false;
+        }
+    }
+
+    public boolean validateDateInputs() throws ParseException {
+        // REGEX FOR DATE INPUT (START & END)
+        String dateFormat = "[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}";
+        Pattern datePattern = Pattern.compile(dateFormat);
+        Matcher startDateMatcher = datePattern.matcher(startDateInput.getText().toString());
+
+        DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        dateFormatter.setLenient(false);
+
+        Date startDate;
+        Date endDate;
+        Date date = dateFormatter.parse(dateFormatter.format(new Date()));
+
+        try {
+            startDate = dateFormatter.parse(startDateInput.getText().toString());
+            endDate = dateFormatter.parse(endDateInput.getText().toString());
+        } catch(Exception e) {
+            return false;
+        }
+
+        if (endDate.compareTo(startDate) > 0 || endDate.compareTo(startDate) == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

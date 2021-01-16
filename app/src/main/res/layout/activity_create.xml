@@ -76,6 +76,7 @@
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="21dp"
+        android:onClick="createGoalButton"
         android:text="@string/createNewButton"
         app:layout_constraintBottom_toTopOf="@+id/clearButton"
         app:layout_constraintEnd_toEndOf="parent"
