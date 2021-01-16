@@ -18,7 +18,7 @@ import ch.zli.eb.myfitnessjourney.model.Goal;
 
 public class DbManager extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "MyFitnessJourney.db";
+    private static final String DB_NAME = "FitnessJourney.db";
     private static final String TABLE_GOAL = "GOAL_TABLE";
     private static final String COLUMN_NAME = "NAME";
     private static final String COLUMN_START_DATE = "START_DATE";
@@ -28,7 +28,7 @@ public class DbManager extends SQLiteOpenHelper {
     private static final String COLUMN_TIME = "TIME";
     private static final String COLUMN_ID = "ID";
 
-    public DbManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public DbManager(Context context) {
         super(context, DB_NAME, null, 1);
     }
 
@@ -44,20 +44,20 @@ public class DbManager extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addRecord(String name, boolean started, boolean reminders, Date startDate, Date endDate, LocalTime time) {
+    public boolean addRecord(Goal userGoal) {
         Format formatter = new SimpleDateFormat("dd.MM.yyyy");
-        String startDateS = formatter.format(startDate);
-        String endDateS = formatter.format(endDate);
+        String startDateS = formatter.format(userGoal.getStartDate());
+        String endDateS = formatter.format(userGoal.getEndDate());
 
         SQLiteDatabase goalDb = this.getWritableDatabase();
         ContentValues contentVal = new ContentValues();
 
-        contentVal.put("name", name);
-        contentVal.put("started", (started) ? 1 : 0);
-        contentVal.put("reminders", (reminders) ? 1 : 0);
-        contentVal.put("startdate", startDateS);
-        contentVal.put("enddate", endDateS);
-        contentVal.put("time", time.toString());
+        contentVal.put(COLUMN_NAME, userGoal.getName());
+        contentVal.put(COLUMN_STARTED, (userGoal.isStarted()) ? 1 : 0);
+        contentVal.put(COLUMN_REMINDERS, (userGoal.isReminders()) ? 1 : 0);
+        contentVal.put(COLUMN_START_DATE, startDateS);
+        contentVal.put(COLUMN_END_DATE, endDateS);
+        contentVal.put(COLUMN_TIME, userGoal.getTime().toString());
 
         long result = goalDb.insert(TABLE_GOAL, null, contentVal);
 

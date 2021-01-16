@@ -24,6 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ch.zli.eb.myfitnessjourney.R;
+import ch.zli.eb.myfitnessjourney.db.DbManager;
 import ch.zli.eb.myfitnessjourney.model.Goal;
 
 public class CreateActivity extends AppCompatActivity {
@@ -41,9 +42,11 @@ public class CreateActivity extends AppCompatActivity {
     Button createButton;
     Button clearButton;
 
-    // GOAL LIST VON SHARED PREFERENCES AND GOAL WHICH IS CREATE UPON SUBMISSION OF FORM
+    // GOAL WHICH IS CREATE UPON SUBMISSION OF FORM
     Goal userGoal;
-    ArrayList<Goal> goalList;
+
+    // DB HELPER FOR GOAL INSERTION
+    DbManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,18 +70,7 @@ public class CreateActivity extends AppCompatActivity {
 
     // HANDLER FOR clearButton
     public void clearInputFields(View v) {
-        nameInput.getText().clear();
-        timeInput.getText().clear();
-
-        if (checkYes.isChecked()) {
-            checkYes.toggle();
-        }
-        if (checkNo.isChecked()) {
-            checkNo.toggle();
-        }
-
-        startDateInput.getText().clear();
-        endDateInput.getText().clear();
+        clear();
     }
 
 
@@ -112,7 +104,9 @@ public class CreateActivity extends AppCompatActivity {
         }
     }
 
+    // GOAL OBJECT IS CREATED AND INSERTED INTO THE DATABASE
     private void createGoalObject() throws ParseException {
+        dbManager = new DbManager(getApplicationContext());
         // REQUIRED DATE FORMAT
         DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
         dateFormatter.setLenient(false);
@@ -124,7 +118,16 @@ public class CreateActivity extends AppCompatActivity {
         LocalTime time = LocalTime.parse(timeInput.getText().toString().concat(":00"));
 
         userGoal = new Goal(name, time, reminders, startDate, endDate, false);
+
+        if (dbManager.addRecord(userGoal)) {
+            Toast.makeText(this, "Goal created successfully!", Toast.LENGTH_LONG).show();
+            clear();
+        } else {
+            Toast.makeText(this, "Goal creating unsuccessful", Toast.LENGTH_LONG).show();
+        }
+        
     }
+
 
     // VALIDATES START DATE AND END DATE INPUT
     public boolean validateDateInputs() throws ParseException {
@@ -152,5 +155,20 @@ public class CreateActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    public void clear() {
+        nameInput.getText().clear();
+        timeInput.getText().clear();
+
+        if (checkYes.isChecked()) {
+            checkYes.toggle();
+        }
+        if (checkNo.isChecked()) {
+            checkNo.toggle();
+        }
+
+        startDateInput.getText().clear();
+        endDateInput.getText().clear();
     }
 }
