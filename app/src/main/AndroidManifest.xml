@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFitnessJourney">
         <activity
-            android:name=".ListActivity"
+            android:name=".controller.ListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CreateActivity"
+            android:name=".controller.CreateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ViewActivity"
+            android:name=".controller.ViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".controller.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

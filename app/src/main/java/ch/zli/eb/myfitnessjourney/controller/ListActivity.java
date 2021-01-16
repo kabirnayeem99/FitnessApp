@@ -1,9 +1,11 @@
-package ch.zli.eb.myfitnessjourney;
+package ch.zli.eb.myfitnessjourney.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ListView;
+
+import ch.zli.eb.myfitnessjourney.R;
 
 public class ListActivity extends AppCompatActivity {
 
