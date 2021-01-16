@@ -134,7 +134,7 @@ public class CreateActivity extends AppCompatActivity {
 
         Date startDate;
         Date endDate;
-        Date date = dateFormatter.parse(dateFormatter.format(new Date()));
+        Date todaysDate = dateFormatter.parse(dateFormatter.format(new Date()));
 
         try {
             startDate = dateFormatter.parse(startDateInput.getText().toString());
@@ -144,7 +144,11 @@ public class CreateActivity extends AppCompatActivity {
         }
 
         if (endDate.compareTo(startDate) > 0 || endDate.compareTo(startDate) == 0) {
-            return true;
+            if (startDate.compareTo(todaysDate) == 0 || startDate.compareTo(todaysDate) > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }

@@ -3,7 +3,6 @@ package ch.zli.eb.myfitnessjourney.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -82,6 +81,7 @@ public class DbManager extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
           while (!cursor.isAfterLast()) {
+              // DATA FETCHED FROM EACH ROW
               int goalId = cursor.getInt(0);
               String goalName = cursor.getString(1);
               boolean started = (cursor.getInt(2) == 1) ? true : false;
@@ -97,7 +97,7 @@ public class DbManager extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
-        
+
         return goalList;
     }
 }
