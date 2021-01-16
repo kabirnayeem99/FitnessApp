@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 public class Goal {
+    int id;
     String name;
     LocalTime time;
     boolean reminders;
@@ -12,6 +13,16 @@ public class Goal {
     boolean started;
 
     public Goal(String name, LocalTime time, boolean reminders, Date startDate, Date endDate, boolean started) {
+        this.name = name;
+        this.time = time;
+        this.reminders = reminders;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.started = started;
+    }
+
+    public Goal(int id, String name, LocalTime time, boolean reminders, Date startDate, Date endDate, boolean started) {
+        this.id = id;
         this.name = name;
         this.time = time;
         this.reminders = reminders;
@@ -68,5 +79,13 @@ public class Goal {
 
     public void setStarted(boolean started) {
         this.started = started;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
