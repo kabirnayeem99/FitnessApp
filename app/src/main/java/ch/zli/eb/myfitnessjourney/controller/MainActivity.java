@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button createButton;
 
     Goal todaysGoal;
+
     // DB HELPER USED TO FETCH GOALS FROM SQLITE DB
     DbManager dbManager;
 
@@ -90,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
             Date start = g.getStartDate();
             Date end = g.getEndDate();
             Date today = dateFormatter.parse(dateFormatter.format(new Date()));
+
+            todaysGoal = g;
 
             if (start.compareTo(today) < 0 && end.compareTo(today) > 0) {
                 todaysGoalDesc.setText(g.getName());
