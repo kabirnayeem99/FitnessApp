@@ -9,7 +9,15 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import ch.zli.eb.myfitnessjourney.R;
+import ch.zli.eb.myfitnessjourney.db.DbManager;
+import ch.zli.eb.myfitnessjourney.model.Goal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     Button progressButton;
     Button currentButton;
     Button createButton;
+
+    Goal todaysGoal;
+    // DB HELPER USED TO FETCH GOALS FROM SQLITE DB
+    DbManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         currentButton = findViewById(R.id.currentButton);
         createButton = findViewById(R.id.createButton);
 
+        try {
+            setTodaysGoal();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     // HANDLES createButton CLICK -> REDIRECTS TO CREATE ACTIVITY
@@ -58,5 +75,35 @@ public class MainActivity extends AppCompatActivity {
     public void redirectToListActivityHistory(View v) {
         Intent listActivityHistory = new Intent(getApplicationContext(), ListActivity.class);
         startActivity(listActivityHistory);
+    }
+
+    public void setTodaysGoal() throws ParseException {
+        dbManager = new DbManager(getApplicationContext());
+        ArrayList<Goal> goals = new ArrayList<>();
+
+        goals = dbManager.getGoals();
+
+        for (Goal g: goals) {
+            DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+            dateFormatter.setLenient(false);
+
+            Date start = g.getStartDate();
+            Date end = g.getEndDate();
+            Date today = dateFormatter.parse(dateFormatter.format(new Date()));
+
+            if (start.compareTo(today) < 0 && end.compareTo(today) > 0) {
+                todaysGoalDesc.setText(g.getName());
+                break;
+            } else if (start.compareTo(today) == 0 && end.compareTo(today) > 0) {
+                todaysGoalDesc.setText(g.getName());
+                break;
+            } else if (start.compareTo(today) < 0 && end.compareTo(today) == 0) {
+                todaysGoalDesc.setText(g.getName());
+                break;
+            } else if (start.compareTo(today) == 0 && end.compareTo(today) == 0) {
+                todaysGoalDesc.setText(g.getName());
+                break;
+            }
+        }
     }
 }
