@@ -149,7 +149,4 @@ public class CreateActivity extends AppCompatActivity {
             return false;
         }
     }
-
-    }
-
 }
