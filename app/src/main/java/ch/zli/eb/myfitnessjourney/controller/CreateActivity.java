@@ -2,6 +2,8 @@ package ch.zli.eb.myfitnessjourney.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,9 +11,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +41,9 @@ public class CreateActivity extends AppCompatActivity {
     Button createButton;
     Button clearButton;
 
+    // GOAL LIST VON SHARED PREFERENCES AND GOAL WHICH IS CREATE UPON SUBMISSION OF FORM
     Goal userGoal;
+    ArrayList<Goal> goalList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +81,9 @@ public class CreateActivity extends AppCompatActivity {
         endDateInput.getText().clear();
     }
 
+
     public void createGoalButton(View v) throws ParseException {
+
         boolean validation = true;
 
         // REGEX FOR TIME INPUT
@@ -80,7 +91,6 @@ public class CreateActivity extends AppCompatActivity {
         Pattern timePattern = Pattern.compile(timeFormat);
         Matcher timeMatcher = timePattern.matcher(timeInput.getText().toString());
 
-        // NOT ENOUGH TIME FOR BETTER VALIDATION
         // VALIDATION PROCESS NAME -> TIME -> CHECKBOXES -> START DATE -> END DATE
         if (nameInput.getText().toString().trim().equals("")) {
             Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show();
@@ -97,15 +107,28 @@ public class CreateActivity extends AppCompatActivity {
         } else if (!validateDateInputs()) {
             Toast.makeText(this, "Please enter valid dates", Toast.LENGTH_LONG).show();
             validation = false;
+        } else if (validation) {
+            createGoalObject();
         }
     }
 
-    public boolean validateDateInputs() throws ParseException {
-        // REGEX FOR DATE INPUT (START & END)
-        String dateFormat = "[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}";
-        Pattern datePattern = Pattern.compile(dateFormat);
-        Matcher startDateMatcher = datePattern.matcher(startDateInput.getText().toString());
+    private void createGoalObject() throws ParseException {
+        // REQUIRED DATE FORMAT
+        DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        dateFormatter.setLenient(false);
 
+        String name = nameInput.getText().toString().trim();
+        Date startDate = dateFormatter.parse(startDateInput.getText().toString());
+        Date endDate = dateFormatter.parse(endDateInput.getText().toString());
+        boolean reminders = checkYes.isChecked();
+        LocalTime time = LocalTime.parse(timeInput.getText().toString().concat(":00"));
+
+        userGoal = new Goal(name, time, reminders, startDate, endDate, false);
+    }
+
+    // VALIDATES START DATE AND END DATE INPUT
+    public boolean validateDateInputs() throws ParseException {
+        // REQUIRED DATE FORMAT
         DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
         dateFormatter.setLenient(false);
 
@@ -125,6 +148,8 @@ public class CreateActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
     }
 
 }
