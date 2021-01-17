@@ -165,6 +165,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onPause() {
         super.onPause();
+        try {
+            saveSteps();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        try {
+            saveSteps();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
