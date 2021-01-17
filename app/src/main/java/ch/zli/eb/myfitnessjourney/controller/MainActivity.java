@@ -120,13 +120,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     // HANDLES progressButton CLICK
     public void startGoal(View v) {
-        Intent startGoalIntent = new Intent(getApplicationContext(), ViewActivity.class);
+        if (todaysGoal != null) {
+            Intent startGoalIntent = new Intent(getApplicationContext(), ViewActivity.class);
 
-        LocalTime timeStarted = LocalTime.now();
+            LocalTime timeStarted = LocalTime.now();
 
-        startGoalIntent.putExtra("startedGoal", todaysGoal);
-        startGoalIntent.putExtra("goalStarted", timeStarted.toString());
-        startActivity(startGoalIntent);
+            startGoalIntent.putExtra("startedGoal", todaysGoal);
+            startGoalIntent.putExtra("goalStarted", timeStarted.toString());
+            startActivity(startGoalIntent);
+        } else {
+            Toast.makeText(getApplicationContext(), "No goals for today", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public void setTodaysGoal() throws ParseException {

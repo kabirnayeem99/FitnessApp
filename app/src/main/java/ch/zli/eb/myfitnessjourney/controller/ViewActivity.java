@@ -1,13 +1,19 @@
 package ch.zli.eb.myfitnessjourney.controller;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,12 +30,14 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 
 import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.model.Goal;
+import ch.zli.eb.myfitnessjourney.speedometer.UserLocation;
 
-public class ViewActivity extends AppCompatActivity {
+public class ViewActivity extends AppCompatActivity implements LocationListener {
 
     Goal startedGoal;
     LocalTime timeStarted;
 
+    // NEEDED FOR updateTime function
     final Handler timerHandler = new Handler();
     Runnable timeUpdater;
     int timePassed = 0;
@@ -54,9 +62,9 @@ public class ViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED){
             //ask for permission
-            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, 1000);
         }
 
         super.onCreate(savedInstanceState);
@@ -79,6 +87,10 @@ public class ViewActivity extends AppCompatActivity {
         timeMid = findViewById(R.id.timeMid);
         timeEnd = findViewById(R.id.timeEnd);
 
+        calculateSpeed();
+        updateSpeed(null);
+
+
         startedGoal = (Goal) getIntent().getSerializableExtra("startedGoal");
         startedGoal.setStarted(true);
 
@@ -92,9 +104,14 @@ public class ViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
     private void setGoalName() {
         goalName.setText(startedGoal.getName());
     }
+
+
 
     private void handleDeadlineProgressBar() throws ParseException {
         // REQUIRED DATE FORMAT
@@ -109,6 +126,9 @@ public class ViewActivity extends AppCompatActivity {
         deadlineMid.setText(dateFormatter.format(todaysDate));
         deadlineStart.setText(dateFormatter.format(startedGoal.getStartDate()));
     }
+
+
+
 
     private void updateTime() {
         timeStart.setText("00:00:00");
@@ -149,11 +169,42 @@ public class ViewActivity extends AppCompatActivity {
         timerHandler.post(timeUpdater);
     }
 
+
+
+
+    @SuppressLint("MissingPermission")
+    private void calculateSpeed() {
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager != null) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        }
+    }
+
+
+
+
+    private void updateSpeed(UserLocation userLocation) {
+        float currentUserSpeed = 0;
+
+        if (userLocation != null) {
+            currentUserSpeed = userLocation.getSpeed();
+        }
+
+        speed.setText(currentUserSpeed + " km/h");
+
+    }
+
+
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         timerHandler.removeCallbacks(timeUpdater);
     }
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -163,5 +214,35 @@ public class ViewActivity extends AppCompatActivity {
             Intent goToMainActivity = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(goToMainActivity);
         }
+    }
+
+
+
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        if (location != null) {
+            UserLocation userLocation = new UserLocation(location);
+            updateSpeed(userLocation);
+        }
+    }
+
+
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
     }
 }
