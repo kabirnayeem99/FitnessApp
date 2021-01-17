@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +21,7 @@ import ch.zli.eb.myfitnessjourney.model.Goal;
 public class ViewActivity extends AppCompatActivity {
 
     Goal startedGoal;
+    LocalTime goalStarted;
 
     Runnable timeUpdater;
 
@@ -64,12 +66,16 @@ public class ViewActivity extends AppCompatActivity {
         timeEnd = findViewById(R.id.timeEnd);
 
         startedGoal = (Goal) getIntent().getSerializableExtra("startedGoal");
+        goalStarted = LocalTime.parse(getIntent().getStringExtra("goalStarted"));
 
         try {
             handleDeadlineProgressBar();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+    private void setGoalName() {
+        goalName.setText(startedGoal.getName());
     }
 
     private void handleDeadlineProgressBar() throws ParseException {

@@ -24,6 +24,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -121,7 +122,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void startGoal(View v) {
         Intent startGoalIntent = new Intent(getApplicationContext(), ViewActivity.class);
 
+        LocalTime timeStarted = LocalTime.now();
+
         startGoalIntent.putExtra("startedGoal", todaysGoal);
+        startGoalIntent.putExtra("goalStarted", timeStarted.toString());
         startActivity(startGoalIntent);
     }
 
