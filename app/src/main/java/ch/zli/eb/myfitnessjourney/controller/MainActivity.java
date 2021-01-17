@@ -223,8 +223,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         editor.putInt("steps", previousStepCount);
         editor.putString("lastloggedday", todayString);
         editor.apply();
-
-
     }
 
     public void loadData() throws ParseException {
