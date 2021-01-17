@@ -103,15 +103,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         startActivity(createForm);
     }
 
-    // HANDLES currentButton CLICK -> REDIRECTS TO LIST ACTIVITY
+    // HANDLES currentButton CLICK -> REDIRECTS TO LIST ACTIVITY WITH TYPE CURRENT
     public void redirectToListActivityCurrent(View v) {
         Intent listActivity = new Intent(getApplicationContext(), ListActivity.class);
+        listActivity.putExtra("history", "false");
         startActivity(listActivity);
     }
 
-    // HANDLES currentButton CLICK -> REDIRECTS TO LIST ACTIVITY
+    // HANDLES historyButton CLICK -> REDIRECTS TO LIST ACTIVITY WITH TYPE HISTORY
     public void redirectToListActivityHistory(View v) {
         Intent listActivityHistory = new Intent(getApplicationContext(), ListActivity.class);
+        listActivityHistory.putExtra("history", "true");
         startActivity(listActivityHistory);
     }
 

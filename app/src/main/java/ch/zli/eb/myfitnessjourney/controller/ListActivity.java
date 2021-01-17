@@ -19,7 +19,7 @@ public class ListActivity extends AppCompatActivity {
     ListView goalList;
 
     // LIST TYPE -> HISTORY OR CURRENT -> HISTORY: TRUE -> GOALS IN PAST ARE DISPLAYED -> FALSE -> CURRENT GOALS
-    boolean history; 
+    boolean history;
 
     // GOAL ARRAY LIST FOR POPULATING LISTVIEW
     ArrayList<Goal> goalListDb = new ArrayList<>();
