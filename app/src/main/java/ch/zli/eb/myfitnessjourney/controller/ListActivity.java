@@ -97,7 +97,7 @@ public class ListActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "No goals have been found", Toast.LENGTH_LONG).show();
         } else {
             for (Goal g: goalListDb) {
-                if (g.getEndDate().compareTo(todaysDate) < 0) {
+                if (g.getEndDate().compareTo(todaysDate) < 0 || g.isStarted()) {
                     goalListTypeHistory.add(g);
                 } else if (g.getEndDate().compareTo(todaysDate) == 0 || g.getEndDate().compareTo(todaysDate) > 0) {
                     goalListTypeCurrent.add(g);

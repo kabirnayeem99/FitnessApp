@@ -1,9 +1,17 @@
 package ch.zli.eb.myfitnessjourney.controller;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -12,9 +20,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
 import ch.zli.eb.myfitnessjourney.R;
@@ -48,6 +53,11 @@ public class ViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+            //ask for permission
+            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
 
@@ -116,7 +126,16 @@ public class ViewActivity extends AppCompatActivity {
                 if (timePassed > timeTotal) {
                     timerHandler.removeCallbacks(timeUpdater);
                     timePassed = 0;
-                    
+
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.Images.Media.TITLE, startedGoal.getName());
+                    values.put(MediaStore.Images.Media.DESCRIPTION, "Capture at end of goal");
+                    Uri image_url = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+                    Intent openCamera = new Intent("android.media.action.IMAGE_CAPTURE");
+                    openCamera.putExtra(MediaStore.EXTRA_OUTPUT, image_url);
+                    startActivityForResult(openCamera, 1001);
+
                 } else {
                     LocalTime timePassedFormat = LocalTime.ofSecondOfDay(timePassed);
                     timeMid.setText(timePassedFormat.toString());
@@ -128,5 +147,15 @@ public class ViewActivity extends AppCompatActivity {
         };
 
         timerHandler.post(timeUpdater);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Intent goToMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(goToMainActivity);
+        }
     }
 }
