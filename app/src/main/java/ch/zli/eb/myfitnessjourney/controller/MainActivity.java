@@ -1,17 +1,25 @@
 package ch.zli.eb.myfitnessjourney.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -36,10 +44,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     Button currentButton;
     Button createButton;
 
-    SensorManager sensorManager;
-    
+    SensorManager sensorManager = null;
+    Sensor stepCounter;
+
     Goal todaysGoal;
-    int steps;
+
+    boolean sensorRunning = false;
+    int stepCount = 0;
+    int previousStepCount = 0;
+
+    Date loadDate;
+    Date today;
+
 
     // DB HELPER USED TO FETCH GOALS FROM SQLITE DB
     DbManager dbManager;
@@ -49,8 +65,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            loadData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         // ASSIGNING VIEW ELEMENTS TO PROPERTIES
         progressBar = findViewById(R.id.progressbar);
+        progressBar.setMax(10000);
 
         stepsStatus = findViewById(R.id.stepsStatus);
         todaysGoalDesc = findViewById(R.id.goalDesc);
@@ -60,7 +83,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         currentButton = findViewById(R.id.currentButton);
         createButton = findViewById(R.id.createButton);
 
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
+            //ask for permission
+            requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 1);
+        }
 
         try {
             setTodaysGoal();
@@ -122,11 +150,85 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
+
+        sensorRunning = true;
+
+        stepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+
+        if (stepCounter == null) {
+            stepsStatus.setText("Device does not support this feature");
+        } else {
+            sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_UI);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        if (sensorRunning) {
+            stepCount = (int) event.values[0];
+            int currentSteps = stepCount - previousStepCount;
 
+            stepsStatus.setText(stepCount + " Steps from 10.000");
+            progressBar.setProgress(currentSteps);
+        }
+    }
+
+    public void resetData() throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        dateFormatter.setLenient(false);
+        today = dateFormatter.parse(dateFormatter.format(new Date()));
+        stepCount = 0;
+        previousStepCount = 0;
+
+        String todayString = dateFormatter.format(today);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyFitnessJourney", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt("steps", 0);
+        editor.putString("lastloggedday", todayString);
+        editor.apply();
+    }
+
+    public void saveSteps() throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        dateFormatter.setLenient(false);
+        today = dateFormatter.parse(dateFormatter.format(new Date()));
+
+        String todayString = dateFormatter.format(today);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyFitnessJourney", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt("steps", previousStepCount);
+        editor.putString("lastloggedday", todayString);
+        editor.apply();
+
+
+    }
+
+    public void loadData() throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        dateFormatter.setLenient(false);
+        today = dateFormatter.parse(dateFormatter.format(new Date()));
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyFitnessJourney", Context.MODE_PRIVATE);
+        int savedSteps = sharedPreferences.getInt("steps", 0);
+        String loadDateStr = sharedPreferences.getString("lastloggedday", "");
+
+        loadDate = dateFormatter.parse(loadDateStr);
+
+        if (today.compareTo(loadDate) > 0) {
+            resetData();
+        } else {
+            previousStepCount = savedSteps;
+            today = loadDate;
+        }
     }
 
     @Override
