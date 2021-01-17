@@ -30,6 +30,7 @@ public class ViewActivity extends AppCompatActivity {
     Goal startedGoal;
     LocalTime timeStarted;
 
+    final Handler timerHandler = new Handler();
     Runnable timeUpdater;
     int timePassed = 0;
 
@@ -112,7 +113,6 @@ public class ViewActivity extends AppCompatActivity {
     private void updateTime() {
         timeStart.setText("00:00:00");
 
-        final Handler timerHandler = new Handler();
         LocalTime midnight = LocalTime.parse("00:00:00");
         int timeTotal = (int) midnight.until(startedGoal.getTime(), SECONDS);
 
@@ -147,6 +147,12 @@ public class ViewActivity extends AppCompatActivity {
         };
 
         timerHandler.post(timeUpdater);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timerHandler.removeCallbacks(timeUpdater);
     }
 
     @Override
