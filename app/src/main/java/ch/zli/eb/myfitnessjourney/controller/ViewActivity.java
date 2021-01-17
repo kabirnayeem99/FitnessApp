@@ -37,6 +37,11 @@ public class ViewActivity extends AppCompatActivity implements LocationListener 
     Goal startedGoal;
     LocalTime timeStarted;
 
+    double startLatitude;
+    double startLongtitude;
+    double calculatedDistance;
+
+
     // NEEDED FOR updateTime function
     final Handler timerHandler = new Handler();
     Runnable timeUpdater;
@@ -87,7 +92,9 @@ public class ViewActivity extends AppCompatActivity implements LocationListener 
         timeMid = findViewById(R.id.timeMid);
         timeEnd = findViewById(R.id.timeEnd);
 
-        calculateSpeed();
+
+        setUpGps();
+        setStartPosition(new UserLocation(new Location("Start")));
         updateSpeed(null);
 
 
@@ -169,11 +176,28 @@ public class ViewActivity extends AppCompatActivity implements LocationListener 
         timerHandler.post(timeUpdater);
     }
 
+    private void updateDistance(UserLocation userLocation) {
+        double latitude = userLocation.getLatitude();
+        double longtitude = userLocation.getLongitude();
 
+        float[] results = new float[2];
+
+        UserLocation.distanceBetween(startLatitude, startLongtitude, latitude, longtitude, results);
+
+        double distanceInMeters = results[0] / 1000;
+
+        distance.setText(distanceInMeters + " m");
+    }
+
+
+    private void setStartPosition(UserLocation userLocation) {
+        startLatitude = userLocation.getLatitude();
+        startLongtitude = userLocation.getLongitude();
+    }
 
 
     @SuppressLint("MissingPermission")
-    private void calculateSpeed() {
+    private void setUpGps() {
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         if (locationManager != null) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
@@ -224,6 +248,7 @@ public class ViewActivity extends AppCompatActivity implements LocationListener 
         if (location != null) {
             UserLocation userLocation = new UserLocation(location);
             updateSpeed(userLocation);
+            updateDistance(userLocation);
         }
     }
 
