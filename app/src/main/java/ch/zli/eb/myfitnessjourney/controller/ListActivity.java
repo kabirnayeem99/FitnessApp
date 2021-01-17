@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -19,8 +20,9 @@ import ch.zli.eb.myfitnessjourney.model.Goal;
 
 public class ListActivity extends AppCompatActivity {
 
-    // VIEW ELEMENT AS PROPERTY
+    // VIEW ELEMENTS AS PROPERTY
     ListView goalList;
+    TextView listDesc;
 
     // LIST TYPE -> HISTORY OR CURRENT -> HISTORY: TRUE -> GOALS IN PAST ARE DISPLAYED -> FALSE -> CURRENT GOALS
     boolean history;
@@ -41,6 +43,7 @@ public class ListActivity extends AppCompatActivity {
 
         // ASSIGNING VIEW ELEMENT TO PROPERTY
         goalList = findViewById(R.id.goalListUi);
+        listDesc = findViewById(R.id.listDesc);
 
         history = Boolean.parseBoolean(getIntent().getStringExtra("history"));
 
@@ -51,25 +54,36 @@ public class ListActivity extends AppCompatActivity {
         try {
             setGoalLists();
             populateList();
-            checkListStatus();
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
     public void populateList() throws ParseException {
+        ArrayList<String> nameListHistory = new ArrayList<>();
+        ArrayList<String> nameListCurrent = new ArrayList<>();
+
         if (Boolean.parseBoolean(getIntent().getStringExtra("history"))) {
-            goalArrayAdapter  = new ArrayAdapter<Goal>(getApplicationContext(), android.R.layout.simple_list_item_1, goalListTypeHistory);
+            if (!goalListTypeHistory.isEmpty()) {
+                listDesc.setText("Completed Goals:");
+                for (Goal g: goalListTypeHistory) {
+                    nameListHistory.add(g.getId() + " | " + g.getName());
+                }
+                goalArrayAdapter  = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, nameListHistory);
+            } else {
+                listDesc.setText("No completed goals have been found");
+            }
+
+        } else if (!goalListTypeCurrent.isEmpty()) {
+            listDesc.setText("Current Goals");
+            for (Goal g: goalListTypeCurrent) {
+                nameListCurrent.add(g.getId() + " | " + g.getName());
+            }
+            goalArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, nameListCurrent);
         } else {
-            goalArrayAdapter = new ArrayAdapter<Goal>(getApplicationContext(), android.R.layout.simple_list_item_1, goalListTypeCurrent);
+            listDesc.setText("No current goals have been found");
         }
         goalList.setAdapter(goalArrayAdapter);
-
-        if (goalListTypeCurrent.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "No current goals have been found", Toast.LENGTH_LONG).show();
-        } else if (goalListTypeHistory.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "No completed goals have been found", Toast.LENGTH_LONG).show();
-        }
     }
 
     public void setGoalLists() throws ParseException {
@@ -92,11 +106,4 @@ public class ListActivity extends AppCompatActivity {
         }
     }
 
-    public void checkListStatus() {
-        if (goalListTypeCurrent.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "No current goals have been found", Toast.LENGTH_LONG).show();
-        } else if (goalListTypeHistory.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "No completed goals have been found", Toast.LENGTH_LONG).show();
-        }
-    }
 }

@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/ListDesc"
+            android:id="@+id/listDesc"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:gravity="center"
