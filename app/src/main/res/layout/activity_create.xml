@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateActivity">
+    tools:context=".controller.CreateActivity">
 
     <TextView
         android:id="@+id/createTitle"
@@ -76,6 +76,7 @@
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="21dp"
+        android:onClick="createGoalButton"
         android:text="@string/createNewButton"
         app:layout_constraintBottom_toTopOf="@+id/clearButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +88,8 @@
         android:layout_height="38dp"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="127dp"
+        android:layout_marginBottom="30dp"
+        android:onClick="clearInputFields"
         android:text="@string/clearButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:text="@string/startDateLabel"
         app:layout_constraintEnd_toStartOf="@+id/startDate"
@@ -153,7 +155,7 @@
         android:id="@+id/startDate"
         android:layout_width="185dp"
         android:layout_height="40dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="70dp"
         android:autofillHints="@string/startDate"
         android:ems="10"
