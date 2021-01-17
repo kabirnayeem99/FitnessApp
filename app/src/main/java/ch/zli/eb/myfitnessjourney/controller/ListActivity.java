@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.db.DbManager;
@@ -23,11 +27,12 @@ public class ListActivity extends AppCompatActivity {
 
     // GOAL ARRAY LIST FOR POPULATING LISTVIEW
     ArrayList<Goal> goalListDb = new ArrayList<>();
+    ArrayList<Goal> goalListTypeHistory = new ArrayList<>();
+    ArrayList<Goal> goalListTypeCurrent = new ArrayList<>();
 
     // DB HELPER FOR GET ALL GOALS QUERY
     DbManager dbManager;
     ArrayAdapter goalArrayAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +42,42 @@ public class ListActivity extends AppCompatActivity {
         // ASSIGNING VIEW ELEMENT TO PROPERTY
         goalList = findViewById(R.id.goalListUi);
 
+        history = Boolean.parseBoolean(getIntent().getStringExtra("history"));
+
         // DB HELPER AND ARRAYLIST FOR QUERIES
         dbManager = new DbManager(getApplicationContext());
 
+        // FILLS ARRAY LISTS ACCORDING TO TYPE
         try {
-            goalListDb = dbManager.getGoals();
+            setGoalLists();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public void populateList() throws ParseException {
 
         goalArrayAdapter  = new ArrayAdapter<Goal>(getApplicationContext(), android.R.layout.simple_list_item_1, goalListDb);
         goalList.setAdapter(goalArrayAdapter);
+    }
 
+    public void setGoalLists() throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        dateFormatter.setLenient(false);
+        Date todaysDate = dateFormatter.parse(dateFormatter.format(new Date()));
+
+        goalListDb = dbManager.getGoals();
+
+        if (goalListDb.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No goals have been found", Toast.LENGTH_LONG).show();
+        } else {
+            for (Goal g: goalListDb) {
+                if (g.getEndDate().compareTo(todaysDate) < 0) {
+                    goalListTypeHistory.add(g);
+                } else if (g.getEndDate().compareTo(todaysDate) == 0 || g.getEndDate().compareTo(todaysDate) > 0) {
+                    goalListTypeCurrent.add(g);
+                }
+            }
+        }
     }
 }
