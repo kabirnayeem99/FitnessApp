@@ -50,15 +50,26 @@ public class ListActivity extends AppCompatActivity {
         // FILLS ARRAY LISTS ACCORDING TO TYPE
         try {
             setGoalLists();
+            populateList();
+            checkListStatus();
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
     public void populateList() throws ParseException {
-
-        goalArrayAdapter  = new ArrayAdapter<Goal>(getApplicationContext(), android.R.layout.simple_list_item_1, goalListDb);
+        if (Boolean.parseBoolean(getIntent().getStringExtra("history"))) {
+            goalArrayAdapter  = new ArrayAdapter<Goal>(getApplicationContext(), android.R.layout.simple_list_item_1, goalListTypeHistory);
+        } else {
+            goalArrayAdapter = new ArrayAdapter<Goal>(getApplicationContext(), android.R.layout.simple_list_item_1, goalListTypeCurrent);
+        }
         goalList.setAdapter(goalArrayAdapter);
+
+        if (goalListTypeCurrent.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No current goals have been found", Toast.LENGTH_LONG).show();
+        } else if (goalListTypeHistory.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No completed goals have been found", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setGoalLists() throws ParseException {
@@ -78,6 +89,14 @@ public class ListActivity extends AppCompatActivity {
                     goalListTypeCurrent.add(g);
                 }
             }
+        }
+    }
+
+    public void checkListStatus() {
+        if (goalListTypeCurrent.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No current goals have been found", Toast.LENGTH_LONG).show();
+        } else if (goalListTypeHistory.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No completed goals have been found", Toast.LENGTH_LONG).show();
         }
     }
 }
