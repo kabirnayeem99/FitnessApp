@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".controller.MainActivity">
 
     <Button
         android:id="@+id/progressButton"
@@ -12,6 +12,7 @@
         android:layout_height="38dp"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="52dp"
+        android:onClick="startGoal"
         android:text="@string/progressButton"
         app:layout_constraintBottom_toTopOf="@+id/historyButton"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -89,6 +90,7 @@
         android:layout_marginStart="52dp"
         android:layout_marginEnd="53dp"
         android:layout_marginBottom="24dp"
+        android:onClick="redirectToListActivityHistory"
         android:text="@string/historyButton"
         app:layout_constraintBottom_toTopOf="@+id/currentButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +103,7 @@
         android:layout_marginStart="53dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="53dp"
+        android:onClick="redirectToListActivityCurrent"
         android:text="@string/currentButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,6 +117,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="53dp"
         android:layout_marginBottom="70dp"
+        android:onClick="redirectToCreateActivity"
         android:text="@string/createButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
