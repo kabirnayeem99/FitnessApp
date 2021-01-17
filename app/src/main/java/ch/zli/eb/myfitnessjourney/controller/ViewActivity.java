@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.model.Goal;
 
@@ -54,5 +59,25 @@ public class ViewActivity extends AppCompatActivity {
         timeEnd = findViewById(R.id.timeEnd);
 
         startedGoal = (Goal) getIntent().getSerializableExtra("startedGoal");
+
+        try {
+            handleDeadlineProgressBar();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleDeadlineProgressBar() throws ParseException {
+        // REQUIRED DATE FORMAT
+        DateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        dateFormatter.setLenient(false);
+        Date todaysDate = dateFormatter.parse(dateFormatter.format(new Date()));
+
+        deadlineProgress.setMax(Integer.MAX_VALUE);
+        deadlineProgress.setProgress(Math.toIntExact(todaysDate.getTime() / 1000));
+
+        deadlineEnd.setText(dateFormatter.format(startedGoal.getEndDate()));
+        deadlineMid.setText(dateFormatter.format(todaysDate));
+        deadlineStart.setText(dateFormatter.format(startedGoal.getStartDate()));
     }
 }
