@@ -3,6 +3,10 @@ package ch.zli.eb.myfitnessjourney.controller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +23,7 @@ import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.db.DbManager;
 import ch.zli.eb.myfitnessjourney.model.Goal;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     // VIEW ELEMENTS AS PROPERTIES
     ProgressBar progressBar;
@@ -32,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
     Button currentButton;
     Button createButton;
 
+    SensorManager sensorManager;
+    
     Goal todaysGoal;
+    int steps;
 
     // DB HELPER USED TO FETCH GOALS FROM SQLITE DB
     DbManager dbManager;
@@ -52,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         progressButton = findViewById(R.id.progressButton);
         currentButton = findViewById(R.id.currentButton);
         createButton = findViewById(R.id.createButton);
+
+
 
         try {
             setTodaysGoal();
@@ -108,5 +117,20 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }
