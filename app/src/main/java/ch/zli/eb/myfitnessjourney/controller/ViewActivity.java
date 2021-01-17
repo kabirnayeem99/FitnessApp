@@ -7,8 +7,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import ch.zli.eb.myfitnessjourney.R;
+import ch.zli.eb.myfitnessjourney.model.Goal;
 
 public class ViewActivity extends AppCompatActivity {
+
+    Goal startedGoal;
 
     // VIEW ELEMENTS AS PROPERTIES
     TextView goalName;
@@ -49,5 +52,7 @@ public class ViewActivity extends AppCompatActivity {
         timeStart = findViewById(R.id.timeStart);
         timeMid = findViewById(R.id.timeMid);
         timeEnd = findViewById(R.id.timeEnd);
+
+        startedGoal = (Goal) getIntent().getSerializableExtra("startedGoal");
     }
 }

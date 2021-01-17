@@ -1,9 +1,10 @@
 package ch.zli.eb.myfitnessjourney.model;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class Goal {
+public class Goal implements Serializable {
     int id;
     String name;
     LocalTime time;
