@@ -3,6 +3,7 @@ package ch.zli.eb.myfitnessjourney.controller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -10,6 +11,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.model.Goal;
@@ -17,6 +20,8 @@ import ch.zli.eb.myfitnessjourney.model.Goal;
 public class ViewActivity extends AppCompatActivity {
 
     Goal startedGoal;
+
+    Runnable timeUpdater;
 
     // VIEW ELEMENTS AS PROPERTIES
     TextView goalName;
@@ -79,5 +84,24 @@ public class ViewActivity extends AppCompatActivity {
         deadlineEnd.setText(dateFormatter.format(startedGoal.getEndDate()));
         deadlineMid.setText(dateFormatter.format(todaysDate));
         deadlineStart.setText(dateFormatter.format(startedGoal.getStartDate()));
+    }
+
+    private void updateTime() {
+        timeStart.setText("00:00");
+        timeEnd.setText(startedGoal.getTime().toString());
+
+        final Handler timerHandler = new Handler();
+
+        timeUpdater = new Runnable() {
+            @Override
+            public void run() {
+                Date date = new Date();
+                DateFormat timeFormatter = new SimpleDateFormat("hh:mm");
+                timeMid.setText(timeFormatter.format(date));
+                timerHandler.postDelayed(timeUpdater,1000);
+            }
+        };
+
+        timerHandler.post(timeUpdater);
     }
 }
