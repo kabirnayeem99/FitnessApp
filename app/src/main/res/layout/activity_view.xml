@@ -115,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="83dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="82dp"
+        android:layout_marginEnd="81dp"
         android:text="@string/timeMid"
         app:layout_constraintEnd_toStartOf="@+id/timeEnd"
         app:layout_constraintStart_toEndOf="@+id/timeStart"

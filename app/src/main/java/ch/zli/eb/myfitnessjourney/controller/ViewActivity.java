@@ -14,6 +14,8 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.model.Goal;
@@ -21,9 +23,10 @@ import ch.zli.eb.myfitnessjourney.model.Goal;
 public class ViewActivity extends AppCompatActivity {
 
     Goal startedGoal;
-    LocalTime goalStarted;
+    LocalTime timeStarted;
 
     Runnable timeUpdater;
+    int timePassed = 0;
 
     // VIEW ELEMENTS AS PROPERTIES
     TextView goalName;
@@ -66,10 +69,14 @@ public class ViewActivity extends AppCompatActivity {
         timeEnd = findViewById(R.id.timeEnd);
 
         startedGoal = (Goal) getIntent().getSerializableExtra("startedGoal");
-        goalStarted = LocalTime.parse(getIntent().getStringExtra("goalStarted"));
+        startedGoal.setStarted(true);
+
+        timeStarted = LocalTime.parse(getIntent().getStringExtra("goalStarted"));
+        setGoalName();
 
         try {
             handleDeadlineProgressBar();
+            updateTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -93,17 +100,29 @@ public class ViewActivity extends AppCompatActivity {
     }
 
     private void updateTime() {
-        timeStart.setText("00:00");
-        timeEnd.setText(startedGoal.getTime().toString());
+        timeStart.setText("00:00:00");
 
         final Handler timerHandler = new Handler();
+        LocalTime midnight = LocalTime.parse("00:00:00");
+        int timeTotal = (int) midnight.until(startedGoal.getTime(), SECONDS);
+
+        timeLeft.setMax(timeTotal);
+        timeEnd.setText(LocalTime.ofSecondOfDay(timeTotal).toString());
 
         timeUpdater = new Runnable() {
             @Override
             public void run() {
-                Date date = new Date();
-                DateFormat timeFormatter = new SimpleDateFormat("hh:mm");
-                timeMid.setText(timeFormatter.format(date));
+                timePassed++;
+                if (timePassed > timeTotal) {
+                    timerHandler.removeCallbacks(timeUpdater);
+                    timePassed = 0;
+                    
+                } else {
+                    LocalTime timePassedFormat = LocalTime.ofSecondOfDay(timePassed);
+                    timeMid.setText(timePassedFormat.toString());
+                    timeLeft.setProgress(timePassed);
+                }
+
                 timerHandler.postDelayed(timeUpdater,1000);
             }
         };
