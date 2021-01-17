@@ -117,6 +117,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         startActivity(listActivityHistory);
     }
 
+    // HANDLES progressButton CLICK
+    public void startGoal(View v) {
+        Intent startGoalIntent = new Intent(getApplicationContext(), ViewActivity.class);
+
+        startGoalIntent.putExtra("startedGoal", todaysGoal);
+        startActivity(startGoalIntent);
+    }
+
     public void setTodaysGoal() throws ParseException {
         dbManager = new DbManager(getApplicationContext());
         ArrayList<Goal> goals = new ArrayList<>();
