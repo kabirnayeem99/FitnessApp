@@ -1,0 +1,318 @@
+commit 97a3f70cfc9881da0b8e2353f8c59ad8aa2ccd12
+Merge: f05a79e 768e1d7
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Mon Jan 18 03:05:54 2021 +0100
+
+    Merge branch 'ImplementViewActivity'
+    Project implementation is done
+
+commit 768e1d709141bde7a4b3c66a44115b39cd9a1218
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Mon Jan 18 03:03:05 2021 +0100
+
+    Implemented notificatin service which runs in background since it is called in every onStop method
+
+commit ea5f92d461131de056e295ed0b600afe7bdc5318
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Mon Jan 18 00:41:30 2021 +0100
+
+    edited distance textview to meters
+
+commit a8eb3cb50120e967b20d2a0f8d23c9efe14ffa34
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Mon Jan 18 00:00:25 2021 +0100
+
+    Implemented speedometer with gps which is not very precise but does the job
+
+commit 53f8a15939eade720a25727043cd3a19ad4abbe7
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 22:38:18 2021 +0100
+
+    removed callbacks from timerhandler on destroy
+
+commit 722ad55dc7ae049868c2c726cfac8b86e7d024cc
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 22:21:46 2021 +0100
+
+    Extended updateTime method -> opens camera and saves to camera roll
+
+commit c003dbd9b700fbdad1bf0bbd3b76c201ff8c0137
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 21:35:30 2021 +0100
+
+    implemented method which updates the time progressbar and the textviews under the progressbar
+
+commit 096e8c8574fe74ecab153b6f9e139615665ee204
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 20:36:45 2021 +0100
+
+    Implemented function which sets the goal name textview
+
+commit 20365fa3c371c28de8dbff237b35ab7eabe3e0d8
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 20:21:56 2021 +0100
+
+    Implemented updateTime function which updates the timeMid textfield in view activity
+
+commit 59c5e1e0cd9be1119a5561217e6314ec2fb01cb2
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 19:51:13 2021 +0100
+
+    Implemented function which fill the deadline progressbar.
+
+commit 6290040e1d32267d044b083be3db0e18da050108
+Merge: 9b6d1f5 c619b78
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 16:59:30 2021 +0100
+
+    Merge branch 'ImplementButtonHandlers' into develop
+    Button handlers are developed on all views, therefore a merge into
+    develop can occur.
+
+commit c619b784a88c1cef9188113169310b479828af7c
+Merge: ecb95ba b3969db
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 16:39:00 2021 +0100
+
+    Merge branch 'ImplementButtonHandlersMainActivity' into ImplementButtonHandlers
+    All Buttonhandlers implemented in main activity -> merge with
+    ImplementButtonHandlers
+
+commit b3969db710b006943183784973e9c59118bd2f91
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 16:37:14 2021 +0100
+
+    Implemented button hander for the start button which start a goal and redirects to View activity
+
+commit 0bf62c17cf46975540080bc8db7d77f70dc05488
+Merge: 9654beb 98065c9
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 16:04:05 2021 +0100
+
+    Merge branch 'ImplementListActivity' into ImplementButtonHandlersMainActivity
+    List Activities are implemented -> Button handlers with redirection to
+    list activity are finished in main activity -> Start button is left to
+    implement
+
+commit 98065c965728ab47ad4580f36cc0a3792c0160ff
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 15:59:45 2021 +0100
+
+    Implemented the textview messages which describe the listview in listActivity
+
+commit bb0243519607de52c134b2ee173a6825a4ee0363
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 15:13:20 2021 +0100
+
+    replaced relativelayout with horizontal layout in list activity -> inserted textview above listview which informs the user if the goals are from the current list or history
+
+commit 6e32cb708834812d182162f720e76b88429f8c36
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 14:16:15 2021 +0100
+
+    Implemented setGoalLists function in List Activity -> fetches goals from db and sorts gaols to according arrays
+
+commit 4aff782a355ec1aac833a9b1f528081ba22ae923
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 13:46:04 2021 +0100
+
+    Transferring type history or current from main activity to list activity
+
+commit 33b5af8488509f84cd225365c160f7ba1cad454a
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 13:42:29 2021 +0100
+
+    List view is populate in list activity, but goals in past and current goals are not seperated
+
+commit eaf8914bfbc15aeec98a59c7813a9053553c91ab
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 12:21:27 2021 +0100
+
+    called saveData function in onPause and onStop -> Main Activity
+
+commit ddab5cc9272544252ba2d5f459f28d003195d624
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 03:47:02 2021 +0100
+
+    Implemented step counter using Sensor.TYPE_STEP_COUNTER -> data displayed on main activity and progressbar is filled -> data is reset the day after -> data is saved in sharedpreferences -> Implementation on main activity
+
+commit 33781e5f3a0dec6350953cd01b571e6dde95b560
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 01:11:49 2021 +0100
+
+    deleted Sensor service
+
+commit 0b901e15db2927189befdda3b66e4a55e3c902e5
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 00:32:24 2021 +0100
+
+    Created SensorService class --> no functionalities
+
+commit 614d3866837617d980087e5a0f890107cc3f78dd
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sun Jan 17 00:17:14 2021 +0100
+
+    All goals are fetched and list is looped through -> checks if goal is within deadline, if yes then name is displayed in main activity -> function implemented in main activity and called in onCreate
+
+commit ecb95ba5d7f0b033b8dfc9940c6e7038d8cccf93
+Merge: 2f1dc4a a06386f
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sat Jan 16 22:32:28 2021 +0100
+
+    Merge branch 'ImplementButtonHandlersCreateActivity' into ImplementButtonHandlers
+    Button Handlers are implemented in CreateActivity -> Ready to implement
+    button handlers on other activities
+
+commit a06386fc6c37759c059076f5b9aaf0b0ac9bd046
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sat Jan 16 22:31:51 2021 +0100
+
+    Implemented a clear method which clears all input fields -> clear method called when clicking clear button and when db insertion is successful
+
+commit 0acdc15471cecbf2cf3b2b7e62472c9067ee00be
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sat Jan 16 22:03:25 2021 +0100
+
+    Edited validateDateInputs in CreateActivity -> comparison between todays date and start date implemented
+
+commit 403aade3da90cc45e19fbf3aef20f16d1bdaee7b
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sat Jan 16 21:50:13 2021 +0100
+
+    Created DbManager class, which is needed for the implementation of the create button in the create activity. DbManager -> Insert query, getAll query
+
+commit ba1a7aa5b004d92991694df1af850ddf497d87c2
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sat Jan 16 19:28:46 2021 +0100
+
+    Fixed minor issue --> removed extra unneeded bracket at end of file
+
+commit 05cd9a2511e6c2e910c1d0d53f15209703ac9a50
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sat Jan 16 19:26:25 2021 +0100
+
+    Implemented createGoalObject() method. Goal object is created
+
+commit 029d09305e217595047d292434947a16ff086ec3
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Sat Jan 16 18:11:40 2021 +0100
+
+    Implemented validation of input fields. Validation process does not create a goal object yet. Toasts are shown if validation fails
+
+commit cdccc67fb816e48b14e8b81c67fd249677cd6928
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Thu Jan 14 09:50:39 2021 +0100
+
+    added com.google.code.gson:gson:2.8.6 dependency to build.gradle
+
+commit dc35fc81f40b241ab9d0d3e6d6cf445b849e13f4
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Thu Jan 14 09:35:16 2021 +0100
+
+    Implemented Goal Class which is needed for the create Button in the create activity. Withouth the goal class, there is nothing to be saved in shared preferences
+
+commit 655c5adbc99066510466514b624f8a3006f782ff
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 23:05:03 2021 +0100
+
+    Implemented clear button -> Button clears all input fields when clicked. Also fixed the view -> End date input field was not shown -> Constraints fixed
+
+commit 2f1dc4ab1bd1c2897cee066c51ca8c26c4ec1a26
+Merge: 9b6d1f5 9654beb
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 22:29:57 2021 +0100
+
+    Merge branch 'ImplementButtonHandlersMainActivity' into ImplementActivityStarts
+
+commit 9654beb25ccfce1650f3a3239a43000d134dc3ec
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 22:25:34 2021 +0100
+
+    Implemented redirection from Main Activity to List Activity (History) for View History button. Corrected Create New Goal Button
+
+commit 8f5d7fa807e6b3260996cded4c67f10f1d3df78c
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 22:23:29 2021 +0100
+
+    Implemented redirection from Main Activity to List Activity for View Current Goals Button click
+
+commit 27ab7115f709c9dd46b25a7b9bb38ad5ed93eb00
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 22:07:58 2021 +0100
+
+    Implemented redirection from Main Activity to Create Activity when clicking Create New Goal Button
+
+commit 9b6d1f5bd25db9c9a628435b2e05af23e00ab5d7
+Merge: f05a79e 3cb2ecb
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 21:10:30 2021 +0100
+
+    Merge branch 'ImplementUI' into develop since the UI Implementation is
+    done. Implementation on other function can begin.
+    
+
+commit 3cb2ecbdfb27a1c433b2f03e6e8a4548f9f13fa7
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 16:55:44 2021 +0100
+
+    Implementation of view elements as properties and assigning the intended elements to the properties: Create Activity including comments for description
+
+commit 2c7abb4f0c25a29cbed32d7c6d7e351cb7b1864e
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 16:37:05 2021 +0100
+
+    Implementation of view elements as properties and assigning the intendend elements to the properties: List Activity including Comments for descrition
+
+commit 36e1941a819ed3131f9735f1327d9326e81572d0
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 16:32:01 2021 +0100
+
+    Implementation of view elements as properties and assigning the intended elements to the properties: View Activity, also added comments to ViewActivity and MainActivity
+
+commit 6e52a8b08c8d3c2158ad67b039ddb080c5be0368
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 16:01:20 2021 +0100
+
+    Implemented View references in MainActivity -> e.g.: button = findViewById(R.id.button);
+
+commit 68f644df682f0b44b64ff5a07538766bd6eb01f9
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Wed Jan 13 14:55:22 2021 +0100
+
+    UI Elements for ListActivity are set -> ListView with ID goalListUi -> no functionalities in Controller
+
+commit c824046b51d938b8bb8c67d6d6cf6a9ef19780ce
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Tue Jan 12 16:14:58 2021 +0100
+
+    UI Elements set for CreateActivity -> no functionalities
+
+commit be71b6e63361ebd9db50d19fdac6a75939bfdca4
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Tue Jan 12 14:27:03 2021 +0100
+
+    UI elements for viewing a started goal set -> no functionalities
+
+commit 7e7df3035aa5cd949c1b1b96d4781638bc57690e
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Tue Jan 12 13:46:58 2021 +0100
+
+    Implemented Main Activity UI using the Pitch Sketch
+
+commit f05a79e5127e9abec00f30061db66910e5022d0d
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Tue Jan 12 10:39:53 2021 +0100
+
+    Implemented base Project -> no functionalities, no UI
+
+commit ab02cd62bb54f2880f9cf8c3955aa80f3acdaf2c
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Tue Jan 12 10:39:15 2021 +0100
+
+    edited .gitignore -> target/
+
+commit 9d0e83cc261b6ca23eebb03a940a3ad64fa1c5bc
+Author: elijonberisha <51161691+elijonberisha@users.noreply.github.com>
+Date:   Tue Jan 12 10:34:07 2021 +0100
+
+    Initial commit

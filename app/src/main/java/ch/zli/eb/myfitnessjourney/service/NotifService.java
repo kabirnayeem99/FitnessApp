@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.db.DbManager;
 import ch.zli.eb.myfitnessjourney.model.Goal;
 
@@ -106,6 +107,7 @@ public class NotifService extends Service {
                         for (Goal g : goalList) {
                             if (g.isReminders()) {
                                 if (g.getEndDate().compareTo(todaysDate) == 0) {
+                                    g.setReminders(false);
                                     sendNotification(g);
                                 }
                             }
@@ -131,8 +133,9 @@ public class NotifService extends Service {
 
     private void sendNotification(Goal g) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Goal Deadline")
-                .setContentText(g.getName() + "is about to pass the deadline!")
+                .setContentText(g.getName() + " is about to pass the deadline!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         getSystemService(NotificationManager.class).notify(notificationId, builder.build());
