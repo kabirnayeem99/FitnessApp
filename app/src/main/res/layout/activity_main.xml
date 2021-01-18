@@ -4,15 +4,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".controller.MainActivity">
+
+    <Button
+        android:id="@+id/progressButton"
+        android:layout_width="122dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="52dp"
+        android:onClick="startGoal"
+        android:text="@string/progressButton"
+        app:layout_constraintBottom_toTopOf="@+id/historyButton"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
+        android:id="@+id/cardioGoals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="165dp"
+        android:text="@string/cardioGoals"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stepsStatus" />
+
+    <TextView
+        android:id="@+id/todayProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="156dp"
+        android:text="@string/todayProgress"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="271dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todayProgress" />
+
+    <TextView
+        android:id="@+id/stepsStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="108dp"
+        android:text="@string/stepsStatus"
+        app:layout_constraintBottom_toTopOf="@+id/cardioGoals"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressbar" />
+
+    <TextView
+        android:id="@+id/goalDesc"
+        android:layout_width="170dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="59dp"
+        android:text="@string/goalDesc"
+        app:layout_constraintBottom_toTopOf="@+id/historyButton"
+        app:layout_constraintEnd_toStartOf="@+id/progressButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/historyButton"
+        android:layout_width="306dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="redirectToListActivityHistory"
+        android:text="@string/historyButton"
+        app:layout_constraintBottom_toTopOf="@+id/currentButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/currentButton"
+        android:layout_width="306dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="53dp"
+        android:onClick="redirectToListActivityCurrent"
+        android:text="@string/currentButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyButton" />
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="306dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="70dp"
+        android:onClick="redirectToCreateActivity"
+        android:text="@string/createButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

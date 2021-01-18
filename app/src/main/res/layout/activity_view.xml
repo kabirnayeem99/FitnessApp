@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.ViewActivity">
+
+    <TextView
+        android:id="@+id/goalNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="170dp"
+        android:text="@string/goalNameView"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/deadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="177dp"
+        android:text="@string/deadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goalNameView" />
+
+    <ProgressBar
+        android:id="@+id/deadlineBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="271dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadline" />
+
+    <TextView
+        android:id="@+id/deadlineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="1dp"
+        android:text="@string/deadlineStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadlineBar" />
+
+    <TextView
+        android:id="@+id/deadlineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="72dp"
+        android:text="@string/deadlineEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadlineBar" />
+
+    <TextView
+        android:id="@+id/deadlineMid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="50dp"
+        android:text="@string/deadlineMid"
+        app:layout_constraintEnd_toStartOf="@+id/deadlineEnd"
+        app:layout_constraintStart_toEndOf="@+id/deadlineStart"
+        app:layout_constraintTop_toBottomOf="@+id/deadlineBar" />
+
+    <TextView
+        android:id="@+id/timeLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="174dp"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="174dp"
+        android:text="@string/timeLeft"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadlineMid" />
+
+    <ProgressBar
+        android:id="@+id/timeBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="271dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeLeft" />
+
+    <TextView
+        android:id="@+id/timeStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="1dp"
+        android:text="@string/timeStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeBar" />
+
+    <TextView
+        android:id="@+id/timeMid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="81dp"
+        android:text="@string/timeMid"
+        app:layout_constraintEnd_toStartOf="@+id/timeEnd"
+        app:layout_constraintStart_toEndOf="@+id/timeStart"
+        app:layout_constraintTop_toBottomOf="@+id/timeBar" />
+
+    <TextView
+        android:id="@+id/timeEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="71dp"
+        android:text="@string/timeEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeBar" />
+
+    <TextView
+        android:id="@+id/distanceView"
+        android:layout_width="132dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="69dp"
+        android:text="@string/distanceView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeStart" />
+
+    <TextView
+        android:id="@+id/speedView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/speedView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/distanceView" />
+
+    <TextView
+        android:id="@+id/distanceUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="72dp"
+        android:text="@string/distanceUnit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeEnd" />
+
+    <TextView
+        android:id="@+id/speedUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="72dp"
+        android:text="@string/speedUnit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/distanceUnit" />
+</androidx.constraintlayout.widget.ConstraintLayout>
