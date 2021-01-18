@@ -1,7 +1,6 @@
 package ch.zli.eb.myfitnessjourney.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -14,7 +13,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -31,6 +29,7 @@ import java.util.Date;
 import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.db.DbManager;
 import ch.zli.eb.myfitnessjourney.model.Goal;
+import ch.zli.eb.myfitnessjourney.service.NotifService;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -196,6 +195,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onStop();
         try {
             saveSteps();
+            Intent notifService = new Intent(getApplicationContext(), NotifService.class);
+            startService(notifService);
         } catch (ParseException e) {
             e.printStackTrace();
         }

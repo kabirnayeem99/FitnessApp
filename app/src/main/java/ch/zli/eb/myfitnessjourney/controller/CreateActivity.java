@@ -2,8 +2,7 @@ package ch.zli.eb.myfitnessjourney.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,14 +10,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +21,7 @@ import java.util.regex.Pattern;
 import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.db.DbManager;
 import ch.zli.eb.myfitnessjourney.model.Goal;
+import ch.zli.eb.myfitnessjourney.service.NotifService;
 
 public class CreateActivity extends AppCompatActivity {
 
@@ -155,6 +151,13 @@ public class CreateActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent notifService = new Intent(getApplicationContext(), NotifService.class);
+        startService(notifService);
     }
 
     public void clear() {

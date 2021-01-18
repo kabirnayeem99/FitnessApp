@@ -30,6 +30,7 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 
 import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.model.Goal;
+import ch.zli.eb.myfitnessjourney.service.NotifService;
 import ch.zli.eb.myfitnessjourney.speedometer.UserLocation;
 
 public class ViewActivity extends AppCompatActivity implements LocationListener {
@@ -241,7 +242,12 @@ public class ViewActivity extends AppCompatActivity implements LocationListener 
     }
 
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent notifService = new Intent(getApplicationContext(), NotifService.class);
+        startService(notifService);
+    }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {

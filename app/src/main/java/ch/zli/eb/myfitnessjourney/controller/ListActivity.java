@@ -2,6 +2,7 @@ package ch.zli.eb.myfitnessjourney.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -17,6 +18,7 @@ import java.util.Date;
 import ch.zli.eb.myfitnessjourney.R;
 import ch.zli.eb.myfitnessjourney.db.DbManager;
 import ch.zli.eb.myfitnessjourney.model.Goal;
+import ch.zli.eb.myfitnessjourney.service.NotifService;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -104,6 +106,13 @@ public class ListActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent notifService = new Intent(getApplicationContext(), NotifService.class);
+        startService(notifService);
     }
 
 }
