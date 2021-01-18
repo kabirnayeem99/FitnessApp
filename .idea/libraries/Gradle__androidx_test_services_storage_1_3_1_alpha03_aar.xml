@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.test.services:storage:1.3.1-alpha03@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ebc218d1b78e4e5a1f4a80078ede54a6/storage-1.3.1-alpha03/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ebc218d1b78e4e5a1f4a80078ede54a6/storage-1.3.1-alpha03/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ebc218d1b78e4e5a1f4a80078ede54a6/storage-1.3.1-alpha03/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.services/storage/1.3.1-alpha03/568370f2f71fa8d1ecc5591ec59ae0421635f46b/storage-1.3.1-alpha03-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
